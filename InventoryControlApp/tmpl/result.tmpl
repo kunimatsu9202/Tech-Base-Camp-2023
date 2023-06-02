@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>仕入れ完了</title>
+
+	<style>
+	h1 {
+  padding: 0.25em 0.5em;/*上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: transparent;/*背景透明に*/
+  border-left: solid 5px #000000;/*左線*/
+    }
+
+    body {
+		margin: 250px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 250;
+        left: 0;
+        background: #C0C0C0;
+        box-shadow: 0px 0px 0px 10px #C0C0C0;/*線の外側*/
+        border: dashed 2px #000000 ;/*破線*/
+        border-radius: 9px;
+        margin-left: 10px;/*はみ出ないように調整*/
+        margin-right: 10px;/*はみ出ないように調整*/
+        padding: 0.5em 0.5em 0.5em 2em;
+}
+
+
+	</style>
+
+</head>
+<body>
+
+<h1>仕入れ完了</h1>
+<p style="margin: auto; width: 220px;">!announce!!product_name!を!product_quantity!個仕入れました</p>
+<form>
+<input type="button" value="仕入れ情報一覧に戻る" onclick="location.href='../purchases/purchase_list.php';">
+</form>
+
+</body>
+</html>
