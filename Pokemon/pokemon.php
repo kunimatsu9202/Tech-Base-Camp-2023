@@ -29,6 +29,8 @@
         $response = file_get_contents($url);
         $data = json_decode($response, true);
 
+        echo "<div class='all-pokemon-card'>";
+
         foreach ($data['results'] as $pokemon){
             $pokemonUrl = $pokemon['url'];
             $pokemonResponse = file_get_contents($pokemonUrl);
@@ -46,6 +48,8 @@
             echo "</p>";
             echo "</div>";
         }
+
+        echo "</div>";
 
         if ($data["next"] != NULL) {
             echo "<form action='pokemon.php'>

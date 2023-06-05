@@ -18,11 +18,8 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 h1 {
@@ -34,7 +31,7 @@ h1 {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 20px;
+  padding: 50px;
   margin-bottom: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: calc(100% / 3);
@@ -43,12 +40,15 @@ h1 {
 }
 
 .pokemon-card:nth-child(3n + 1) {
-  clear: none;
+  float: left;
 }
 
-.pokemon-card:nth-child(3n + 4) {
-  margin-left: auto;
-  margin-right: auto;
+.pokemon-card:nth-child(3n + 2) {
+  float: left;
+}
+
+.pokemon-card:nth-child(3n + 3) {
+  float: left;
 }
 
 h2 {
@@ -176,7 +176,7 @@ p {
 /* Add more type classes as needed */
 
 button {
-  margin-top: 10px;
+  margin-top: 200px;
   background-color: #4caf50;
   color: white;
   border: none;
@@ -184,18 +184,19 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  float: right;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
+/* ページサイズに合わせて行列変更 */
 @media screen and (max-width: 800px) {
   .pokemon-card {
     width: calc(100% / 2);
   }
 }
-
 @media screen and (max-width: 600px) {
   .pokemon-card {
     width: 100%;
