@@ -72,32 +72,31 @@
 
         if ($limit == 10) {
             echo "<form action='pokemon.php' method='get'>
-            <button name='twenty' value='{$offset}'>20件</button>
-            <button name='fifty' value='{$offset}'>50件</button>
+            <button id='twenty' name='twenty' value='{$offset}'>20件</button>
+            <button id='fifty' name='fifty' value='{$offset}'>50件</button>
         </form>";
         } elseif ($limit == 20) {
             echo "<form action='pokemon.php' method='get'>
-            <button name='ten' value='{$offset}'>10件</button>
-            <button name='fifty' value='{$offset}'>50件</button>
+            <button id='ten' name='ten' value='{$offset}'>10件</button>
+            <button id='fifty' name='fifty' value='{$offset}'>50件</button>
         </form>";
         } elseif ($limit == 50) {
             echo "<form action='pokemon.php' method='get'>
-            <button name='ten' value='{$offset}'>10件</button>
-            <button name='twenty' value='{$offset}'>20件</button>
+            <button id='ten' name='ten' value='{$offset}'>10件</button>
+            <button id='twenty' name='twenty' value='{$offset}'>20件</button>
         </form>";
         }
 
-
         if ($data["next"] != NULL) {
             echo "<form action='pokemon.php' method = 'get'>
-            <button type='submit' name='next_offset' value='{$offset}'>次のページ</button>
+            <button id='next' type='submit' name='next_offset' value='{$offset}'>次のページ</button>
             <input type='hidden' name='next_limit' value='{$limit}'>
             </form>";
         }
 
         if ($data["previous"] != NULL) {
             echo "<form action='pokemon.php' method = 'get'>
-            <button name='previous_offset' value='{$offset}'>前のページ</button>
+            <button id='previous' name='previous_offset' value='{$offset}'>前のページ</button>
             <input type='hidden' name='previous_limit' value='{$limit}'>
             </form>";
         }
