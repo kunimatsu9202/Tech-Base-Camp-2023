@@ -178,10 +178,8 @@ p {
 .button-container {
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: static;
+  clear: both;
 }
 
 button {
@@ -199,34 +197,8 @@ button:hover {
   background-color: #45a049;
 }
 
-#next {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-}
+/* .decoy {
 
-#previous {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-}
-
-/* #ten {
-  position: absolute;
-  bottom: 100%;
-  right: 0%;
-}
-
-#twenty {
-  position: absolute;
-  bottom: 100%;
-  right: 0%;
-}
-
-#fifty {
-  position: absolute;
-  top: 0%;
-  left: 0%;
 } */
 
 /* ページサイズに合わせて行列変更 */

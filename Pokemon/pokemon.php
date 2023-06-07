@@ -51,12 +51,21 @@
         echo "<div class='all-pokemon-card'>";
 
         foreach ($data['results'] as $pokemon){
+            /* ポケモン１体のデータを取得 */
             $pokemonUrl = $pokemon['url'];
             $pokemonResponse = file_get_contents($pokemonUrl);
-            $pokemonData = json_decode($pokemonResponse, true); // ポケモン１体のデータ
+            $pokemonData = json_decode($pokemonResponse, true);
+            
+            /* ポケモン１体の日本語を取得 */
+            $url_species = 'https://pokeapi.co/api/v2/pokemon-species/' . $pokemonData['id'];
+            $response_species = file_get_contents($url_species);
+            $species_data = json_decode($response_species, true);
+
+            // var_dump($species_data['flavor_text_entries'][22]['flavor_text']);
+            // exit;
 
             echo "<div class='pokemon-card'>";
-            echo "<h2>" . $pokemonData['name'] . "</h2>";
+            echo "<h2>" . $species_data['names'][0]['name'] . "</h2>";
             echo "<img src='" . $pokemonData['sprites']['front_default'] . "' alt='" . $pokemonData['name'] . "'>";
             echo "<p>たかさ: " . $pokemonData['height']/10 . "m </p>";
             echo "<p>おもさ: " . $pokemonData['weight']/10 . "kg </p>";
@@ -70,36 +79,45 @@
 
         echo "</div>";
 
+        echo "<div class='button-container'>";
+
+        if ($data["previous"] != NULL) {
+            echo "<form action='pokemon.php' method = 'get'>
+            <button name='previous_offset' value='{$offset}'>前のページ</button>
+            <input type='hidden' name='previous_limit' value='{$limit}'>
+            </form>";
+        } else {
+            echo "<div>　　　　　</div>"; // decoy
+        }
+
         if ($limit == 10) {
             echo "<form action='pokemon.php' method='get'>
-            <button id='twenty' name='twenty' value='{$offset}'>20件</button>
-            <button id='fifty' name='fifty' value='{$offset}'>50件</button>
+            <button name='twenty' value='{$offset}'>20件</button>
+            <button name='fifty' value='{$offset}'>50件</button>
         </form>";
         } elseif ($limit == 20) {
             echo "<form action='pokemon.php' method='get'>
-            <button id='ten' name='ten' value='{$offset}'>10件</button>
-            <button id='fifty' name='fifty' value='{$offset}'>50件</button>
+            <button name='ten' value='{$offset}'>10件</button>
+            <button name='fifty' value='{$offset}'>50件</button>
         </form>";
         } elseif ($limit == 50) {
             echo "<form action='pokemon.php' method='get'>
-            <button id='ten' name='ten' value='{$offset}'>10件</button>
-            <button id='twenty' name='twenty' value='{$offset}'>20件</button>
+            <button name='ten' value='{$offset}'>10件</button>
+            <button name='twenty' value='{$offset}'>20件</button>
         </form>";
         }
 
         if ($data["next"] != NULL) {
             echo "<form action='pokemon.php' method = 'get'>
-            <button id='next' type='submit' name='next_offset' value='{$offset}'>次のページ</button>
+            <button type='submit' name='next_offset' value='{$offset}'>次のページ</button>
             <input type='hidden' name='next_limit' value='{$limit}'>
             </form>";
+        } else {
+            echo "<div>　　　　　</div>"; // decoy
         }
 
-        if ($data["previous"] != NULL) {
-            echo "<form action='pokemon.php' method = 'get'>
-            <button id='previous' name='previous_offset' value='{$offset}'>前のページ</button>
-            <input type='hidden' name='previous_limit' value='{$limit}'>
-            </form>";
-        }
+        echo "</div>";
+
         ?>
 
     </div>
