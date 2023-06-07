@@ -83,18 +83,13 @@
             $pokemonUrl = $pokemon['url'];
             $pokemonResponse = file_get_contents($pokemonUrl);
             $pokemonData = json_decode($pokemonResponse, true);
-
-            // print "<pre>";
-            // var_dump($pokemonData['types']);
-            // print "</pre>";
-
-            // exit;
             
-            /* ポケモン１体の日本語を取得 */
+            /* ポケモン１体の日本語なまえを取得 */
             $url_species = 'https://pokeapi.co/api/v2/pokemon-species/' . $pokemonData['id'];
             $response_species = file_get_contents($url_species);
             $species_data = json_decode($response_species, true);
 
+            /* ポケモン一体の日本語タイプを取得 */
             $types_ja = [];
             foreach ($pokemonData['types'] as $type) {
                 $url_type = $type['type']['url'];
@@ -136,7 +131,7 @@
             <input type='hidden' name='data' value='{$species_data['flavor_text_entries'][22]['flavor_text']}'>
             <input type='hidden' name='offset' value='{$offset}'>
             <input type='hidden' name='limit' value='{$limit}'>
-            </form>"; // 配列送れないからエラーが出る
+            </form>";
             echo "</div>";
         }
 
@@ -180,6 +175,21 @@
         }
 
         echo "</div>";
+
+        // file_get_contentsの結果をキャッシュしつつ返す
+        function get_cache_contents($url) {
+            $cache_path = "./pokemon.cache";
+            $cache_limit = 86400;
+            if(file_exists($cache_path) && filemtime($cache_path) + $cache_limit > time()) {
+            // キャッシュ有効期間内なのでキャッシュの内容を返す
+            return file_get_contents($cache_path);
+            } else {
+            // キャッシュがないか、期限切れなので取得しなおす
+            $data = file_get_contents($url);
+            file_put_contents($cache_path, $data, LOCK_EX); // キャッシュに保存
+            return $data;
+            }
+        }
 
         ?>
 
