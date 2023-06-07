@@ -91,9 +91,9 @@
 
             /* ポケモン一体の日本語タイプを取得 */
             $types_ja = [];
-            foreach ($pokemonData['types'] as $type) {
-                $url_type = $type['type']['url'];
-                $response_type = get_cache_contents($url_type, $pokemon["name"]."_jatype");
+            for ($i=0; $i<count($pokemonData['types']); $i++) {
+                $url_type = $pokemonData['types'][$i]['type']['url'];
+                $response_type = get_cache_contents($url_type, $pokemon["name"]."_jatype" .$i);
                 $type_ja = json_decode($response_type, true);
                 array_push($types_ja, $type_ja['names'][0]['name']);
             }
