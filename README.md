@@ -12,4 +12,4 @@
 
 <br>
 
-**Pokemon** : PoekAPI を使用したポケモン図鑑
+**Pokedex** : PoekAPI を使用したポケモン図鑑
