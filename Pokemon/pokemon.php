@@ -81,19 +81,19 @@
         foreach ($data['results'] as $pokemon){
             /* ポケモン１体のデータを取得 */
             $pokemonUrl = $pokemon['url'];
-            $pokemonResponse = file_get_contents($pokemonUrl);
+            $pokemonResponse = get_cache_contents($pokemonUrl, $pokemon["name"]);
             $pokemonData = json_decode($pokemonResponse, true);
             
             /* ポケモン１体の日本語なまえを取得 */
             $url_species = 'https://pokeapi.co/api/v2/pokemon-species/' . $pokemonData['id'];
-            $response_species = file_get_contents($url_species);
+            $response_species = get_cache_contents($url_species, $pokemon["name"]."_janame");
             $species_data = json_decode($response_species, true);
 
             /* ポケモン一体の日本語タイプを取得 */
             $types_ja = [];
             foreach ($pokemonData['types'] as $type) {
                 $url_type = $type['type']['url'];
-                $response_type = file_get_contents($url_type);
+                $response_type = get_cache_contents($url_type, $pokemon["name"]."_jatype");
                 $type_ja = json_decode($response_type, true);
                 array_push($types_ja, $type_ja['names'][0]['name']);
             }
@@ -177,9 +177,9 @@
         echo "</div>";
 
         // file_get_contentsの結果をキャッシュしつつ返す
-        function get_cache_contents($url) {
-            $cache_path = "./pokemon.cache";
-            $cache_limit = 86400;
+        function get_cache_contents($url, $pokemon) {
+            $cache_path = "./cache/" . $pokemon . ".json" ;
+            $cache_limit = 864000;
             if(file_exists($cache_path) && filemtime($cache_path) + $cache_limit > time()) {
             // キャッシュ有効期間内なのでキャッシュの内容を返す
             return file_get_contents($cache_path);
