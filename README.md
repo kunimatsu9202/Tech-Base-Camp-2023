@@ -9,3 +9,7 @@
 <br>
 
 **InvetoryControlApp**：在庫管理システムのアプリケーション
+
+<br>
+
+**Pokemon** : PoekAPI を使用したポケモン図鑑
